@@ -1,0 +1,29 @@
+Package: r4subrisk
+Title: Risk Quantification Engine for Clinical Submission Readiness
+Version: 0.1.0
+Authors@R:
+    person("Pawan Rama", "Mali", , "prm@outlook.in", role = c("aut", "cre"))
+Description: Quantifies submission risk using an FMEA-inspired framework
+    (probability, impact, detectability). Builds risk registers from evidence,
+    computes Risk Priority Numbers (RPN), classifies risk levels, and emits
+    standardized R4SUB evidence table rows via 'r4subcore'. Supports risk
+    mitigation tracking and trend analysis across submission milestones.
+License: MIT + file LICENSE
+URL: https://github.com/R4SUB/r4subrisk
+BugReports: https://github.com/R4SUB/r4subrisk/issues
+Depends:
+    R (>= 4.2)
+Imports:
+    cli,
+    dplyr,
+    r4subcore,
+    rlang,
+    tibble
+Suggests:
+    testthat (>= 3.0.0)
+Remotes:
+    R4SUB/r4subcore
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
