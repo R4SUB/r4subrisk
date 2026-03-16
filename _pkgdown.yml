@@ -38,6 +38,10 @@ reference:
     contents:
       - evidence_to_risks
       - risk_register_to_evidence
+  - title: "Print Methods"
+    contents:
+      - print.risk_register
+      - print.risk_scores
 
 footer:
   structure:
