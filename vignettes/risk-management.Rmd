@@ -1,0 +1,130 @@
+---
+title: "Risk Management with r4subrisk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Risk Management with r4subrisk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+Clinical submissions require a systematic approach to identifying, scoring,
+and mitigating risks. The `r4subrisk` package implements an FMEA (Failure
+Mode and Effects Analysis) based risk framework aligned with ICH Q9 quality
+risk management principles.
+
+```{r load}
+library(r4subrisk)
+```
+
+## Default configuration
+
+`risk_config_default()` defines the RPN (Risk Priority Number) band
+thresholds and scoring scales:
+
+```{r config}
+cfg <- risk_config_default()
+cfg$rpn_bands
+cfg$required_origins
+```
+
+## Creating a risk register
+
+A risk register is built from a data frame with at minimum `risk_id`,
+`description`, `probability`, `impact`, and `detectability` — each scored
+1–5. The RPN is computed as `probability * impact * detectability`.
+
+```{r risk-register}
+risks <- data.frame(
+  risk_id       = paste0("RISK-00", 1:5),
+  description   = c(
+    "Missing required variables in ADSL",
+    "Incomplete derivation documentation for ADTTE",
+    "Independent QC not completed for ADRS",
+    "Define-XML missing codelist references",
+    "ADRG not included in submission package"
+  ),
+  category      = c("data_quality", "traceability", "process",
+                    "documentation", "regulatory"),
+  probability   = c(3L, 4L, 2L, 2L, 1L),
+  impact        = c(4L, 5L, 5L, 3L, 5L),
+  detectability = c(2L, 3L, 4L, 2L, 1L),
+  owner         = c("Data Mgmt", "Stats", "Stats", "Programming", "Regulatory"),
+  stringsAsFactors = FALSE
+)
+
+rr <- create_risk_register(risks)
+print(rr)
+```
+
+## Computing risk scores
+
+`compute_risk_scores()` returns aggregate metrics including overall risk
+score (normalized 0-1), mean RPN, and per-category breakdown:
+
+```{r risk-scores}
+rs <- compute_risk_scores(rr)
+rs$overall_risk_score
+rs$mean_rpn
+rs$risk_distribution
+rs$category_summary
+```
+
+## Applying mitigations
+
+`apply_mitigations()` updates the register with post-control scores to show
+residual risk after mitigations are applied:
+
+```{r mitigations}
+controls <- data.frame(
+  risk_id               = c("RISK-001", "RISK-002", "RISK-003"),
+  mitigation            = c(
+    "Automated variable check implemented in CI pipeline",
+    "Derivation review added to QC checklist",
+    "QC sign-off required before dataset lock"
+  ),
+  probability_residual  = c(1L, 2L, 1L),
+  impact_residual       = c(4L, 5L, 5L),
+  detectability_residual = c(1L, 1L, 1L),
+  stringsAsFactors = FALSE
+)
+
+rr_mitigated <- apply_mitigations(rr, controls)
+```
+
+## Comparing registers
+
+`compare_risk_registers()` shows the RPN change before and after
+mitigations:
+
+```{r compare}
+comparison <- compare_risk_registers(rr, rr_mitigated)
+comparison
+```
+
+## Integration with r4subcore evidence
+
+`evidence_to_risks()` converts an evidence table with `indicator_domain == "risk"`
+into a risk register format, allowing automation of risk identification
+from evidence outputs:
+
+```{r evidence-to-risk, eval=FALSE}
+# Requires r4subcore
+ctx <- r4subcore::r4sub_run_context(study_id = "STUDY01")
+ev <- r4subcore::as_evidence(
+  data.frame(
+    asset_type = "program", asset_id = "prod_adrs.R",
+    source_name = "r4subrisk", source_version = "0.1.0",
+    indicator_id = "R-001", indicator_name = "Program Validation",
+    indicator_domain = "risk", severity = "high",
+    result = "fail", metric_value = 0, metric_unit = "score",
+    message = "DVP not submitted", location = "prod_adrs.R",
+    evidence_payload = "{}", stringsAsFactors = FALSE
+  ), ctx = ctx
+)
+risk_df <- evidence_to_risks(ev)
+rr_from_evidence <- create_risk_register(risk_df)
+```
