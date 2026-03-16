@@ -55,37 +55,39 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="r4subrisk">r4subrisk<a class="anchor" aria-label="anchor" href="#r4subrisk"></a>
 </h1></div>
-<p><strong>r4subrisk</strong> is the risk quantification engine in the R4SUB ecosystem.</p>
-<p>It uses an <strong>FMEA-inspired framework</strong> (Probability x Impact x Detectability) to quantify submission risk, build risk registers, track mitigations, and emit standardized R4SUB evidence rows.</p>
-<p>It answers the question:</p>
+<!-- badges: start -->
+
+<p><strong>r4subrisk</strong> is the risk quantification engine in the R4SUB ecosystem. It uses an <strong>FMEA-inspired framework</strong> (Probability × Impact × Detectability) to quantify submission risk, build risk registers, track mitigations, and emit standardized R4SUB evidence rows.</p>
 <blockquote>
 <p>What are the key risks to submission readiness, how severe are they, and are they being addressed?</p>
 </blockquote>
 <div class="section level2">
-<h2 id="core-concepts">Core Concepts<a class="anchor" aria-label="anchor" href="#core-concepts"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div class="section level3">
-<h3 id="fmea-risk-model">FMEA Risk Model<a class="anchor" aria-label="anchor" href="#fmea-risk-model"></a>
-</h3>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"r4subrisk"</span><span class="op">)</span></span></code></pre></div>
+<p>Development version:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R4SUB/r4subcore"</span>, <span class="st">"R4SUB/r4subrisk"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="fmea-risk-model">FMEA Risk Model<a class="anchor" aria-label="anchor" href="#fmea-risk-model"></a>
+</h2>
 <p>Each risk is scored on three dimensions (1–5 scale):</p>
 <ul>
 <li>
-<strong>Probability</strong>: likelihood the issue persists to submission</li>
+<strong>Probability</strong> — likelihood the issue persists to submission</li>
 <li>
-<strong>Impact</strong>: regulatory consequence if unresolved</li>
+<strong>Impact</strong> — regulatory consequence if unresolved</li>
 <li>
-<strong>Detectability</strong>: difficulty of catching the issue (1=easy, 5=hard)</li>
+<strong>Detectability</strong> — difficulty of catching the issue (1 = easy, 5 = hard)</li>
 </ul>
-<p><strong>RPN</strong> (Risk Priority Number) = Probability x Impact x Detectability (range 1–125)</p>
-</div>
-<div class="section level3">
-<h3 id="rpn-bands">RPN Bands<a class="anchor" aria-label="anchor" href="#rpn-bands"></a>
-</h3>
+<p><strong>RPN</strong> (Risk Priority Number) = Probability × Impact × Detectability (range 1–125)</p>
 <table class="table">
 <thead><tr class="header">
 <th>RPN</th>
 <th>Level</th>
-<th>Interpretation</th>
+<th>Action</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -111,21 +113,14 @@
 </tbody>
 </table>
 </div>
-</div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R4SUB/r4subcore"</span>, <span class="st">"R4SUB/r4subrisk"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
 <div class="section level2">
 <h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/R4SUB/r4subcore" class="external-link">r4subcore</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r4sub.github.io/r4subrisk/">r4subrisk</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># From a manual risk register</span></span>
+<span><span class="co"># Build a risk register manually</span></span>
 <span><span class="va">risks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  risk_id       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R001"</span>, <span class="st">"R002"</span><span class="op">)</span>,</span>
 <span>  description   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Missing SDTM variables"</span>, <span class="st">"Unmapped ADaM derivations"</span><span class="op">)</span>,</span>
@@ -134,20 +129,20 @@
 <span>  impact        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>  detectability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_risk_register.html">create_risk_register</a></span><span class="op">(</span><span class="va">risks</span><span class="op">)</span></span>
-<span><span class="va">rr</span></span>
 <span></span>
-<span><span class="co"># Or derive risks automatically from evidence</span></span>
+<span><span class="va">rr</span>     <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_risk_register.html">create_risk_register</a></span><span class="op">(</span><span class="va">risks</span><span class="op">)</span></span>
+<span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/compute_risk_scores.html">compute_risk_scores</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Or derive risks from an evidence table</span></span>
 <span><span class="va">risk_items</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/evidence_to_risks.html">evidence_to_risks</a></span><span class="op">(</span><span class="va">evidence</span><span class="op">)</span></span>
 <span><span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_risk_register.html">create_risk_register</a></span><span class="op">(</span><span class="va">risk_items</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Compute scores and emit evidence</span></span>
-<span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/compute_risk_scores.html">compute_risk_scores</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span>
+<span><span class="co"># Emit r4subcore-compatible evidence rows</span></span>
 <span><span class="va">ctx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r4subcore/man/r4sub_run_context.html" class="external-link">r4sub_run_context</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"ABC123"</span>, environment <span class="op">=</span> <span class="st">"DEV"</span><span class="op">)</span></span>
-<span><span class="va">ev</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/risk_register_to_evidence.html">risk_register_to_evidence</a></span><span class="op">(</span><span class="va">rr</span>, ctx <span class="op">=</span> <span class="va">ctx</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">ev</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/risk_register_to_evidence.html">risk_register_to_evidence</a></span><span class="op">(</span><span class="va">rr</span>, ctx <span class="op">=</span> <span class="va">ctx</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="core-functions">Core Functions<a class="anchor" aria-label="anchor" href="#core-functions"></a>
+<h2 id="key-functions">Key Functions<a class="anchor" aria-label="anchor" href="#key-functions"></a>
 </h2>
 <table class="table">
 <colgroup>
@@ -203,13 +198,13 @@
 </h2>
 <ul>
 <li>
-<strong>FMEA-grounded</strong>: industry-standard risk methodology</li>
+<strong>FMEA-grounded:</strong> industry-standard risk methodology</li>
 <li>
-<strong>Evidence-first</strong>: all risk items emit r4subcore evidence rows</li>
+<strong>Evidence-first:</strong> all risk items emit r4subcore evidence rows</li>
 <li>
-<strong>Mitigation-aware</strong>: track and measure risk reduction over time</li>
+<strong>Mitigation-aware:</strong> track and measure risk reduction over time</li>
 <li>
-<strong>Transparent</strong>: every RPN is decomposable into P x I x D</li>
+<strong>Transparent:</strong> every RPN is decomposable into P × I × D</li>
 </ul>
 </div>
 <div class="section level2">
@@ -251,7 +246,15 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/R4SUB/r4subrisk/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/R4SUB/r4subrisk/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=r4subrisk" class="external-link"><img src="https://www.r-pkg.org/badges/version/r4subrisk" alt="CRAN status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=r4subrisk" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/r4subrisk" alt="CRAN downloads"></a></li>
+<li><a href="https://r4sub.r-universe.dev/r4subrisk" class="external-link"><img src="https://r4sub.r-universe.dev/badges/r4subrisk" alt="r-universe"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
