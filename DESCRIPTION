@@ -12,7 +12,7 @@ Description: Quantifies submission risk using a Failure Modes and Effects
     Submission) evidence table rows via 'r4subcore'. Supports risk mitigation
     tracking and trend analysis across submission milestones.
 License: MIT + file LICENSE
-URL: https://github.com/R4SUB/r4subrisk
+URL: https://r4sub.github.io/r4subrisk/, https://github.com/R4SUB/r4subrisk
 BugReports: https://github.com/R4SUB/r4subrisk/issues
 Depends:
     R (>= 4.2)

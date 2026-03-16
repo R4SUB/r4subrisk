@@ -1,0 +1,46 @@
+url: https://r4sub.github.io/r4subrisk/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#2C6DB5"
+
+navbar:
+  bg: light
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/R4SUB/r4subrisk
+      aria-label: GitHub
+
+home:
+  title: "r4subrisk — Risk Quantification for Clinical Submissions"
+  description: >
+    FMEA-based risk quantification engine for the R4SUB ecosystem. Builds
+    risk registers, computes RPN scores, tracks mitigations, and emits
+    standardized evidence rows.
+
+reference:
+  - title: "Configuration"
+    contents:
+      - risk_config_default
+  - title: "Risk Register"
+    contents:
+      - create_risk_register
+      - apply_mitigations
+      - compare_risk_registers
+  - title: "Scoring"
+    contents:
+      - compute_risk_scores
+  - title: "Evidence Integration"
+    contents:
+      - evidence_to_risks
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
