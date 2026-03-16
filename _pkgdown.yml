@@ -19,10 +19,6 @@ navbar:
 
 home:
   title: "r4subrisk — Risk Quantification for Clinical Submissions"
-  description: >
-    FMEA-based risk quantification engine for the R4SUB ecosystem. Builds
-    risk registers, computes RPN scores, tracks mitigations, and emits
-    standardized evidence rows.
 
 reference:
   - title: "Configuration"
@@ -36,9 +32,12 @@ reference:
   - title: "Scoring"
     contents:
       - compute_risk_scores
+      - classify_rpn
+      - risk_indicator_summary
   - title: "Evidence Integration"
     contents:
       - evidence_to_risks
+      - risk_register_to_evidence
 
 footer:
   structure:
