@@ -8,7 +8,7 @@ Authors@R:
 Description: Quantifies submission risk using a Failure Modes and Effects
     Analysis (FMEA)-inspired framework (probability, impact, detectability).
     Builds risk registers from evidence, computes Risk Priority Numbers (RPN),
-    classifies risk levels, and emits standardized R4SUB (R for Regulatory
+    classifies risk levels, and emits standardized R4SUB (Ready for
     Submission) evidence table rows via 'r4subcore'. Supports risk mitigation
     tracking and trend analysis across submission milestones.
 License: MIT + file LICENSE
