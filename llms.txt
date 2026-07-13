@@ -11,12 +11,14 @@ mitigations, and emit standardized R4SUB evidence rows.
 ## Installation
 
 ``` r
+
 install.packages("r4subrisk")
 ```
 
 Development version:
 
 ``` r
+
 pak::pak(c("R4SUB/r4subcore", "R4SUB/r4subrisk"))
 ```
 
@@ -42,6 +44,7 @@ Each risk is scored on three dimensions (1–5 scale):
 ## Quick Start
 
 ``` r
+
 library(r4subcore)
 library(r4subrisk)
 
@@ -69,17 +72,17 @@ ev  <- risk_register_to_evidence(rr, ctx = ctx)
 
 ## Key Functions
 
-| Function                                                                                                  | Purpose                                             |
-|-----------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| [`risk_config_default()`](https://r4sub.github.io/r4subrisk/reference/risk_config_default.md)             | FMEA scales, RPN bands, severity mappings           |
-| [`classify_rpn()`](https://r4sub.github.io/r4subrisk/reference/classify_rpn.md)                           | Classify an RPN value into a risk level             |
-| [`create_risk_register()`](https://r4sub.github.io/r4subrisk/reference/create_risk_register.md)           | Build a risk register with RPN + levels             |
-| [`evidence_to_risks()`](https://r4sub.github.io/r4subrisk/reference/evidence_to_risks.md)                 | Derive risk items from r4subcore evidence           |
-| [`compute_risk_scores()`](https://r4sub.github.io/r4subrisk/reference/compute_risk_scores.md)             | Aggregate risk metrics (mean/max RPN, distribution) |
-| [`risk_indicator_summary()`](https://r4sub.github.io/r4subrisk/reference/risk_indicator_summary.md)       | Summary indicator table                             |
-| [`risk_register_to_evidence()`](https://r4sub.github.io/r4subrisk/reference/risk_register_to_evidence.md) | Emit r4subcore-compatible evidence rows             |
-| [`apply_mitigations()`](https://r4sub.github.io/r4subrisk/reference/apply_mitigations.md)                 | Update risks with mitigations, recompute RPN        |
-| [`compare_risk_registers()`](https://r4sub.github.io/r4subrisk/reference/compare_risk_registers.md)       | Trend analysis between snapshots                    |
+| Function | Purpose |
+|----|----|
+| [`risk_config_default()`](https://r4sub.github.io/r4subrisk/reference/risk_config_default.md) | FMEA scales, RPN bands, severity mappings |
+| [`classify_rpn()`](https://r4sub.github.io/r4subrisk/reference/classify_rpn.md) | Classify an RPN value into a risk level |
+| [`create_risk_register()`](https://r4sub.github.io/r4subrisk/reference/create_risk_register.md) | Build a risk register with RPN + levels |
+| [`evidence_to_risks()`](https://r4sub.github.io/r4subrisk/reference/evidence_to_risks.md) | Derive risk items from r4subcore evidence |
+| [`compute_risk_scores()`](https://r4sub.github.io/r4subrisk/reference/compute_risk_scores.md) | Aggregate risk metrics (mean/max RPN, distribution) |
+| [`risk_indicator_summary()`](https://r4sub.github.io/r4subrisk/reference/risk_indicator_summary.md) | Summary indicator table |
+| [`risk_register_to_evidence()`](https://r4sub.github.io/r4subrisk/reference/risk_register_to_evidence.md) | Emit r4subcore-compatible evidence rows |
+| [`apply_mitigations()`](https://r4sub.github.io/r4subrisk/reference/apply_mitigations.md) | Update risks with mitigations, recompute RPN |
+| [`compare_risk_registers()`](https://r4sub.github.io/r4subrisk/reference/compare_risk_registers.md) | Trend analysis between snapshots |
 
 ## Design Principles
 

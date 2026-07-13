@@ -6,6 +6,7 @@ FMEA (Failure Mode and Effects Analysis) based risk framework aligned
 with ICH Q9 quality risk management principles.
 
 ``` r
+
 library(r4subrisk)
 ```
 
@@ -16,6 +17,7 @@ defines the RPN (Risk Priority Number) band thresholds and scoring
 scales:
 
 ``` r
+
 cfg <- risk_config_default()
 cfg$rpn_bands
 #> $critical
@@ -41,6 +43,7 @@ scored 1–5. The RPN is computed as
 `probability * impact * detectability`.
 
 ``` r
+
 risks <- data.frame(
   risk_id       = paste0("RISK-00", 1:5),
   description   = c(
@@ -81,6 +84,7 @@ returns aggregate metrics including overall risk score (normalized 0-1),
 mean RPN, and per-category breakdown:
 
 ``` r
+
 rs <- compute_risk_scores(rr)
 rs$overall_risk_score
 #> [1] 0.2256
@@ -111,6 +115,7 @@ updates the register with post-control scores to show residual risk
 after mitigations are applied:
 
 ``` r
+
 controls <- data.frame(
   risk_id               = c("RISK-001", "RISK-002", "RISK-003"),
   mitigation            = c(
@@ -133,6 +138,7 @@ rr_mitigated <- apply_mitigations(rr, controls)
 shows the RPN change before and after mitigations:
 
 ``` r
+
 comparison <- compare_risk_registers(rr, rr_mitigated)
 comparison
 #> $rpn_changes
@@ -173,6 +179,7 @@ register format, allowing automation of risk identification from
 evidence outputs:
 
 ``` r
+
 # Requires r4subcore
 ctx <- r4subcore::r4sub_run_context(study_id = "STUDY01")
 ev <- r4subcore::as_evidence(
