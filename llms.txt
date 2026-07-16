@@ -26,9 +26,9 @@ pak::pak(c("R4SUB/r4subcore", "R4SUB/r4subrisk"))
 
 Each risk is scored on three dimensions (1–5 scale):
 
-- **Probability** — likelihood the issue persists to submission
-- **Impact** — regulatory consequence if unresolved
-- **Detectability** — difficulty of catching the issue (1 = easy, 5 =
+- **Probability**: likelihood the issue persists to submission
+- **Impact**: regulatory consequence if unresolved
+- **Detectability**: difficulty of catching the issue (1 = easy, 5 =
   hard)
 
 **RPN** (Risk Priority Number) = Probability × Impact × Detectability
