@@ -1,0 +1,108 @@
+---
+title: "Case study: FMEA risk on a pilot submission"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Case study: FMEA risk on a pilot submission}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+A risk log that only lists risks is a to-do list. What a reviewer wants to see
+is that the risks were ranked, worked, and reduced. `r4subrisk` puts numbers on
+that story using a Failure Modes and Effects Analysis (FMEA) model: every risk
+gets a probability, an impact, and a detectability score, and their product is
+the Risk Priority Number (RPN).
+
+This case study runs the example submission risk register from `r4subdata`
+through that model, then shows what happens when the team starts mitigating.
+
+```{r libs, message = FALSE}
+library(r4subrisk)
+library(r4subdata)
+```
+
+## The register
+
+`risk_register_pharma` is a worked submission risk log: 18 risks across data
+quality, traceability, and documentation, each already scored on the three FMEA
+dimensions.
+
+```{r register}
+risk_register_pharma[, c("risk_id", "category", "probability", "impact",
+                         "detectability")]
+```
+
+`create_risk_register()` validates the scales and computes the RPN and risk
+level for each row.
+
+```{r build}
+rr <- create_risk_register(risk_register_pharma)
+rr
+```
+
+## The risk picture
+
+`compute_risk_scores()` rolls the register up: the mean and maximum RPN, an
+overall 0 to 1 risk score, and the spread of risk levels.
+
+```{r scores}
+scores <- compute_risk_scores(rr)
+scores
+scores$category_summary
+```
+
+The category summary is where prioritisation starts. The categories carrying the
+highest mean RPN are the ones to work first.
+
+## Working the highest risks
+
+Mitigation is the point of the exercise. Suppose the team addresses the two
+highest-RPN risks: they add the missing SDTM variables and document the ADaM
+derivation, which lowers both the probability and the detectability difficulty.
+
+```{r ranked}
+ranked <- rr[order(-rr$rpn), c("risk_id", "description", "rpn", "risk_level")]
+head(ranked, 3)
+```
+
+`apply_mitigations()` takes the updates and recomputes the RPNs and levels.
+
+```{r mitigate}
+top_two <- head(ranked$risk_id, 2)
+
+updates <- data.frame(
+  risk_id       = top_two,
+  probability   = c(1, 2),
+  detectability = c(1, 1),
+  status        = "mitigated",
+  stringsAsFactors = FALSE
+)
+
+rr_after <- apply_mitigations(rr, updates)
+```
+
+## Before and after
+
+`compare_risk_registers()` reports what moved: which RPNs dropped, which risk
+levels changed, and the shift in the mean.
+
+```{r compare}
+comparison <- compare_risk_registers(rr, rr_after)
+comparison$rpn_changes[comparison$rpn_changes$rpn_delta != 0, ]
+comparison$delta_mean_rpn
+```
+
+The mean RPN falls and the two worked risks drop to lower levels. That is the
+before-and-after a reviewer is looking for: not that the study had no risks, but
+that the risks were found, ranked, and brought down.
+
+## Feeding the readiness score
+
+The risk register does not live in isolation. `risk_register_to_evidence()`
+turns it into R4SUB evidence rows, which flow into the Risk pillar of the
+Submission Confidence Index alongside quality, trace, and usability evidence.
+The FMEA work you do here shows up directly in the submission's readiness score.

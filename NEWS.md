@@ -1,5 +1,9 @@
 # r4subrisk (development version)
 
+- Add vignette: "Case study: FMEA risk on a pilot submission", a worked
+  before-and-after mitigation walkthrough using the example risk register from
+  `r4subdata`.
+
 - Clarified the package DESCRIPTION: "R4SUB" expands to "Ready for Submission"
   (previously "R for Regulatory Submission", inconsistent with the rest of the
   ecosystem).
