@@ -6,18 +6,19 @@
 \alias{r4subrisk-package}
 \title{r4subrisk: Risk Quantification Engine for Clinical Submission Readiness}
 \description{
-Quantifies submission risk using an FMEA-inspired framework (probability, impact, detectability). Builds risk registers from evidence, computes Risk Priority Numbers (RPN), classifies risk levels, and emits standardized R4SUB evidence table rows via 'r4subcore'. Supports risk mitigation tracking and trend analysis across submission milestones.
+Quantifies submission risk using a Failure Modes and Effects Analysis (FMEA)-inspired framework (probability, impact, detectability). Builds risk registers from evidence, computes Risk Priority Numbers (RPN), classifies risk levels, and emits standardized R4SUB (Ready for Submission) evidence table rows via 'r4subcore'. Supports risk mitigation tracking and trend analysis across submission milestones.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://r4sub.github.io/r4subrisk/}
   \item \url{https://github.com/R4SUB/r4subrisk}
   \item Report bugs at \url{https://github.com/R4SUB/r4subrisk/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Pawan Rama Mali \email{prm@outlook.in}
+\strong{Maintainer}: Pawan Rama Mali \email{prm@outlook.in} (\href{https://orcid.org/0000-0001-7864-5819}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

@@ -23,7 +23,9 @@ Imports:
     rlang,
     tibble
 Suggests:
+    ggplot2,
     knitr,
+    plotly,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
