@@ -28,7 +28,13 @@ qualitative ICH Q9 style ranking that collapses probability and impact into
 acceptable, tolerable, and unacceptable levels.
 }
 \examples{
-apply_risk_model(make_test_risks(), risk_model_probability_impact())
-apply_risk_model(make_test_risks(), risk_model_ich_q9())
+risks <- data.frame(
+  risk_id     = c("R001", "R002", "R003"),
+  probability = c(4, 3, 2),
+  impact      = c(5, 4, 3),
+  detectability = c(2, 3, 4)
+)
+apply_risk_model(risks, risk_model_probability_impact())
+apply_risk_model(risks, risk_model_ich_q9())
 
 }

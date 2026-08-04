@@ -22,6 +22,12 @@ normalized 0--100 risk scores, and qualitative levels. Any model that
 produces a 0--100 risk score plugs into the same Risk pillar computation.
 }
 \examples{
-apply_risk_model(make_test_risks(), risk_model_fmea())
+risks <- data.frame(
+  risk_id     = c("R001", "R002", "R003"),
+  probability = c(4, 3, 2),
+  impact      = c(5, 4, 3),
+  detectability = c(2, 3, 4)
+)
+apply_risk_model(risks, risk_model_fmea())
 
 }

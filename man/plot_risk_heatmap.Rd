@@ -30,7 +30,16 @@ the chosen metric and labelled with the number of risks that fall in them.
 }
 \examples{
 \dontrun{
-rr <- create_risk_register(make_test_risks())
+risks <- data.frame(
+  risk_id       = c("R001", "R002", "R003"),
+  description   = c("Missing SDTM variables", "Unmapped ADaM derivations",
+                    "Inconsistent define.xml"),
+  category      = c("data_quality", "traceability", "documentation"),
+  probability   = c(4, 3, 2),
+  impact        = c(5, 4, 3),
+  detectability = c(2, 3, 4)
+)
+rr <- create_risk_register(risks)
 plot_risk_heatmap(rr)
 }
 

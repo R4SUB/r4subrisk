@@ -16,6 +16,12 @@
 #' @return An object of class `"risk_model"`.
 #'
 #' @examples
+#' risks <- data.frame(
+#'   risk_id     = c("R001", "R002", "R003"),
+#'   probability = c(4, 3, 2),
+#'   impact      = c(5, 4, 3),
+#'   detectability = c(2, 3, 4)
+#' )
 #' m <- risk_model(
 #'   name = "impact_only",
 #'   score = function(df) df$impact,
@@ -23,7 +29,7 @@
 #'   bands = list(high = c(4, 5), medium = c(3, 3), low = c(1, 2)),
 #'   required = "impact"
 #' )
-#' apply_risk_model(make_test_risks(), m)
+#' apply_risk_model(risks, m)
 #'
 #' @export
 risk_model <- function(name, score, max_raw, bands, required = character()) {
@@ -67,8 +73,14 @@ risk_model <- function(name, score, max_raw, bands, required = character()) {
 #' @return A `risk_model` object.
 #'
 #' @examples
-#' apply_risk_model(make_test_risks(), risk_model_probability_impact())
-#' apply_risk_model(make_test_risks(), risk_model_ich_q9())
+#' risks <- data.frame(
+#'   risk_id     = c("R001", "R002", "R003"),
+#'   probability = c(4, 3, 2),
+#'   impact      = c(5, 4, 3),
+#'   detectability = c(2, 3, 4)
+#' )
+#' apply_risk_model(risks, risk_model_probability_impact())
+#' apply_risk_model(risks, risk_model_ich_q9())
 #'
 #' @name risk_models
 NULL
@@ -137,7 +149,13 @@ risk_model_ich_q9 <- function() {
 #'   higher is more risk), `risk_level`, and `model`.
 #'
 #' @examples
-#' apply_risk_model(make_test_risks(), risk_model_fmea())
+#' risks <- data.frame(
+#'   risk_id     = c("R001", "R002", "R003"),
+#'   probability = c(4, 3, 2),
+#'   impact      = c(5, 4, 3),
+#'   detectability = c(2, 3, 4)
+#' )
+#' apply_risk_model(risks, risk_model_fmea())
 #'
 #' @export
 apply_risk_model <- function(risks, model = risk_model_fmea()) {
@@ -186,7 +204,13 @@ apply_risk_model <- function(risks, model = risk_model_fmea()) {
 #' @return A single number in `[0, 100]`.
 #'
 #' @examples
-#' scored <- apply_risk_model(make_test_risks(), risk_model_ich_q9())
+#' risks <- data.frame(
+#'   risk_id     = c("R001", "R002", "R003"),
+#'   probability = c(4, 3, 2),
+#'   impact      = c(5, 4, 3),
+#'   detectability = c(2, 3, 4)
+#' )
+#' scored <- apply_risk_model(risks, risk_model_ich_q9())
 #' risk_model_overall(scored)
 #'
 #' @export

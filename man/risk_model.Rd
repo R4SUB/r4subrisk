@@ -29,6 +29,12 @@ score, a normalized 0--100 risk score, and a qualitative level. Use the
 pre-built models or supply your own \code{score} function.
 }
 \examples{
+risks <- data.frame(
+  risk_id     = c("R001", "R002", "R003"),
+  probability = c(4, 3, 2),
+  impact      = c(5, 4, 3),
+  detectability = c(2, 3, 4)
+)
 m <- risk_model(
   name = "impact_only",
   score = function(df) df$impact,
@@ -36,6 +42,6 @@ m <- risk_model(
   bands = list(high = c(4, 5), medium = c(3, 3), low = c(1, 2)),
   required = "impact"
 )
-apply_risk_model(make_test_risks(), m)
+apply_risk_model(risks, m)
 
 }
