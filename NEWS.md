@@ -1,4 +1,4 @@
-# r4subrisk (development version)
+# r4subrisk 0.2.0
 
 - Add `risk_reduction_summary()`, which quantifies the risk removed between two
   registers: total and mean RPN reduction, percentage reduction, and counts of
