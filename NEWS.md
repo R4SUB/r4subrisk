@@ -1,9 +1,17 @@
 # r4subrisk (development version)
 
+- Add `risk_reduction_summary()`, which quantifies the risk removed between two
+  registers: total and mean RPN reduction, percentage reduction, and counts of
+  risks reduced, downgraded, added, and resolved.
+- Add `plot_risk_heatmap()` and `risk_heatmap_data()` for the standard FMEA
+  probability by impact heatmap, with an optional interactive `plotly` version.
+- Add a pluggable risk-model interface: `risk_model()` plus the pre-built
+  `risk_model_fmea()`, `risk_model_probability_impact()`, and
+  `risk_model_ich_q9()`. `apply_risk_model()` scores any set of risks to a
+  normalized 0-100 value so alternative models feed the same Risk pillar.
 - Add vignette: "Case study: FMEA risk on a pilot submission", a worked
   before-and-after mitigation walkthrough using the example risk register from
   `r4subdata`.
-
 - Clarified the package DESCRIPTION: "R4SUB" expands to "Ready for Submission"
   (previously "R for Regulatory Submission", inconsistent with the rest of the
   ecosystem).

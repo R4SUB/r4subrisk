@@ -128,3 +128,55 @@ ev <- r4subcore::as_evidence(
 risk_df <- evidence_to_risks(ev)
 rr_from_evidence <- create_risk_register(risk_df)
 ```
+
+## Reduction summary
+
+`compare_risk_registers()` lists what changed. `risk_reduction_summary()` rolls
+that up into the headline a reviewer wants: how much risk was actually removed.
+
+```{r reduction}
+risk_reduction_summary(rr, rr_mitigated)
+```
+
+## Risk heatmap
+
+The FMEA probability by impact heatmap is the standard way quality and
+regulatory teams read a risk picture. `risk_heatmap_data()` gives the grid as a
+table, and `plot_risk_heatmap()` draws it.
+
+```{r heatmap, eval=requireNamespace("ggplot2", quietly = TRUE), fig.width=6, fig.height=5}
+plot_risk_heatmap(rr)
+```
+
+## Alternative risk models
+
+FMEA (probability times impact times detectability) is the default, but the
+scoring rule is pluggable. `risk_model_probability_impact()` drops detectability
+for a two-factor matrix, and `risk_model_ich_q9()` gives a qualitative
+acceptable, tolerable, unacceptable ranking. Any model normalizes to a 0-100
+score, so the Risk pillar consumes them the same way.
+
+```{r models}
+risks <- data.frame(
+  risk_id = c("R001", "R002"),
+  description = c("Missing vars", "Bad derivation"),
+  probability = c(4, 3), impact = c(5, 4), detectability = c(2, 3)
+)
+
+apply_risk_model(risks, risk_model_probability_impact())
+apply_risk_model(risks, risk_model_ich_q9())
+```
+
+To use your own rule, build a `risk_model()` with a scoring function, a maximum
+raw score for normalization, and level bands:
+
+```{r custom-model}
+impact_only <- risk_model(
+  name = "impact_only",
+  score = function(df) df$impact,
+  max_raw = 5,
+  bands = list(high = c(4, 5), medium = c(3, 3), low = c(1, 2)),
+  required = "impact"
+)
+apply_risk_model(risks, impact_only)
+```
