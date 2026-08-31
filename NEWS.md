@@ -1,3 +1,14 @@
+# r4subrisk 0.3.0
+
+- Add `risk_monte_carlo()`, which puts uncertainty on the FMEA scores. An RPN is
+  built from three integer judgements, so a single number hides how confident
+  the assessment is. The simulation samples each probability, impact, and
+  detectability around its assessed value and reports the distribution of RPN,
+  per risk and for the register as a whole, including a 90% interval and the
+  probability that each risk is actually critical. The random state is set and
+  restored per call when a `seed` is given, so results are reproducible without
+  disturbing the caller's RNG.
+
 # r4subrisk 0.2.0
 
 - Add `risk_reduction_summary()`, which quantifies the risk removed between two
