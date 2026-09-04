@@ -89,6 +89,10 @@ ev  <- risk_register_to_evidence(rr, ctx = ctx)
 - **Mitigation-aware:** track and measure risk reduction over time
 - **Transparent:** every RPN is decomposable into P × I × D
 
+## Maintained by
+
+R4SUB is part of the open-source work of [TechWorksLab](https://techworkslab.com) - clinical programming and regulatory submissions. Maintainer: Pawan Rama Mali.
+
 ## License
 
 MIT
