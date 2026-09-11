@@ -96,3 +96,7 @@ R4SUB is part of the open-source work of [TechWorksLab](https://techworkslab.com
 ## License
 
 MIT
+
+## Further reading
+
+- [FMEA risk scoring for a submission package](https://techworkslab.com/insights-fmea-risk-scoring-submissions), the RPN risk model this package implements, from TECHWORKSLAB.
