@@ -34,8 +34,8 @@ cfg$required_origins
 ## Creating a risk register
 
 A risk register is built from a data frame with at minimum `risk_id`,
-`description`, `probability`, `impact`, and `detectability` — each scored
-1–5. The RPN is computed as `probability * impact * detectability`.
+`description`, `probability`, `impact`, and `detectability` - each scored
+1-5. The RPN is computed as `probability * impact * detectability`.
 
 ```{r risk-register}
 risks <- data.frame(

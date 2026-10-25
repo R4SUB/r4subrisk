@@ -18,7 +18,7 @@ navbar:
       aria-label: GitHub
 
 home:
-  title: "r4subrisk — Risk Quantification for Clinical Submissions"
+  title: "r4subrisk: Risk Quantification for Clinical Submissions"
 
 reference:
   - title: "Configuration"
@@ -34,6 +34,20 @@ reference:
       - compute_risk_scores
       - classify_rpn
       - risk_indicator_summary
+  - title: "Risk Modeling"
+    contents:
+      - risk_model
+      - risk_models
+      - apply_risk_model
+      - risk_model_overall
+      - risk_reduction_summary
+  - title: "Monte Carlo Simulation"
+    contents:
+      - risk_monte_carlo
+  - title: "Visualization"
+    contents:
+      - risk_heatmap_data
+      - plot_risk_heatmap
   - title: "Evidence Integration"
     contents:
       - evidence_to_risks
@@ -42,6 +56,9 @@ reference:
     contents:
       - print.risk_register
       - print.risk_scores
+      - print.risk_model
+      - print.risk_monte_carlo
+      - print.risk_reduction
 
 footer:
   structure:
