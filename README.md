@@ -25,20 +25,20 @@ pak::pak(c("R4SUB/r4subcore", "R4SUB/r4subrisk"))
 
 ## FMEA Risk Model
 
-Each risk is scored on three dimensions (1–5 scale):
+Each risk is scored on three dimensions (1-5 scale):
 
 - **Probability**: likelihood the issue persists to submission
 - **Impact**: regulatory consequence if unresolved
 - **Detectability**: difficulty of catching the issue (1 = easy, 5 = hard)
 
-**RPN** (Risk Priority Number) = Probability × Impact × Detectability (range 1–125)
+**RPN** (Risk Priority Number) = Probability × Impact × Detectability (range 1-125)
 
 | RPN | Level | Action |
 |---|---|---|
-| 80–125 | `critical` | Immediate action required |
-| 40–79 | `high` | Must resolve before submission |
-| 15–39 | `medium` | Plan mitigation |
-| 1–14 | `low` | Monitor |
+| 80-125 | `critical` | Immediate action required |
+| 40-79 | `high` | Must resolve before submission |
+| 15-39 | `medium` | Plan mitigation |
+| 1-14 | `low` | Monitor |
 
 ## Quick Start
 
