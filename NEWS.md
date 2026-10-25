@@ -1,3 +1,7 @@
+# r4subrisk 0.3.1
+
+- Metadata and documentation polish for CRAN submission; no user-facing changes.
+
 # r4subrisk 0.3.0
 
 - Add `risk_monte_carlo()`, which puts uncertainty on the FMEA scores. An RPN is

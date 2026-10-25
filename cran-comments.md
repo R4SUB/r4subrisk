@@ -1,6 +1,6 @@
 ## Submission
 
-This is an update of r4subrisk from 0.1.0 (on CRAN) to 0.2.0, a feature release
+This is an update of r4subrisk from 0.1.0 (on CRAN) to 0.3.1, a feature release
 for the R4SUB (Ready for Submission) ecosystem. Highlights:
 
 * `risk_reduction_summary()` quantifying risk removed between two registers.
