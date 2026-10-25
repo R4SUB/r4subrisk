@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">r4subrisk</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/risk-management.html">Risk Management with r4subrisk</a></li>
+<li><a class="dropdown-item" href="../articles/case-study-fmea-pilot.html">Case study: FMEA risk on a pilot submission</a></li>
+    <li><a class="dropdown-item" href="../articles/risk-management.html">Risk Management with r4subrisk</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -99,7 +100,7 @@ Number) band thresholds and scoring scales:</p>
 <p>A risk register is built from a data frame with at minimum
 <code>risk_id</code>, <code>description</code>,
 <code>probability</code>, <code>impact</code>, and
-<code>detectability</code> — each scored 1–5. The RPN is computed as
+<code>detectability</code> - each scored 1-5. The RPN is computed as
 <code>probability * impact * detectability</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">risks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -230,8 +231,8 @@ after mitigations:</p>
 allowing automation of risk identification from evidence outputs:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Requires r4subcore</span></span>
-<span><span class="va">ctx</span> <span class="op">&lt;-</span> <span class="fu">r4subcore</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4subcore/man/r4sub_run_context.html" class="external-link">r4sub_run_context</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"STUDY01"</span><span class="op">)</span></span>
-<span><span class="va">ev</span> <span class="op">&lt;-</span> <span class="fu">r4subcore</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/r4subcore/man/as_evidence.html" class="external-link">as_evidence</a></span><span class="op">(</span></span>
+<span><span class="va">ctx</span> <span class="op">&lt;-</span> <span class="fu">r4subcore</span><span class="fu">::</span><span class="fu"><a href="https://r4sub.github.io/r4subcore/reference/r4sub_run_context.html" class="external-link">r4sub_run_context</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"STUDY01"</span><span class="op">)</span></span>
+<span><span class="va">ev</span> <span class="op">&lt;-</span> <span class="fu">r4subcore</span><span class="fu">::</span><span class="fu"><a href="https://r4sub.github.io/r4subcore/reference/as_evidence.html" class="external-link">as_evidence</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>    asset_type <span class="op">=</span> <span class="st">"program"</span>, asset_id <span class="op">=</span> <span class="st">"prod_adrs.R"</span>,</span>
 <span>    source_name <span class="op">=</span> <span class="st">"r4subrisk"</span>, source_version <span class="op">=</span> <span class="st">"0.1.0"</span>,</span>
@@ -244,6 +245,77 @@ allowing automation of risk identification from evidence outputs:</p>
 <span><span class="op">)</span></span>
 <span><span class="va">risk_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/evidence_to_risks.html">evidence_to_risks</a></span><span class="op">(</span><span class="va">ev</span><span class="op">)</span></span>
 <span><span class="va">rr_from_evidence</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_risk_register.html">create_risk_register</a></span><span class="op">(</span><span class="va">risk_df</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="reduction-summary">Reduction summary<a class="anchor" aria-label="anchor" href="#reduction-summary"></a>
+</h2>
+<p><code><a href="../reference/compare_risk_registers.html">compare_risk_registers()</a></code> lists what changed.
+<code><a href="../reference/risk_reduction_summary.html">risk_reduction_summary()</a></code> rolls that up into the headline a
+reviewer wants: how much risk was actually removed.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/risk_reduction_summary.html">risk_reduction_summary</a></span><span class="op">(</span><span class="va">rr</span>, <span class="va">rr_mitigated</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Risk Reduction Summary</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Total RPN: 141 -&gt; 141 (0 down, 0%)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span>   Mean RPN: 28.2 -&gt; 28.2</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span>   Risks reduced: 0, downgraded a level: 0</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="risk-heatmap">Risk heatmap<a class="anchor" aria-label="anchor" href="#risk-heatmap"></a>
+</h2>
+<p>The FMEA probability by impact heatmap is the standard way quality
+and regulatory teams read a risk picture.
+<code><a href="../reference/risk_heatmap_data.html">risk_heatmap_data()</a></code> gives the grid as a table, and
+<code><a href="../reference/plot_risk_heatmap.html">plot_risk_heatmap()</a></code> draws it.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_risk_heatmap.html">plot_risk_heatmap</a></span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></code></pre></div>
+<p><img src="risk-management_files/figure-html/heatmap-1.png" class="r-plt" alt="" width="576"></p>
+</div>
+<div class="section level2">
+<h2 id="alternative-risk-models">Alternative risk models<a class="anchor" aria-label="anchor" href="#alternative-risk-models"></a>
+</h2>
+<p>FMEA (probability times impact times detectability) is the default,
+but the scoring rule is pluggable.
+<code><a href="../reference/risk_models.html">risk_model_probability_impact()</a></code> drops detectability for a
+two-factor matrix, and <code><a href="../reference/risk_models.html">risk_model_ich_q9()</a></code> gives a
+qualitative acceptable, tolerable, unacceptable ranking. Any model
+normalizes to a 0-100 score, so the Risk pillar consumes them the same
+way.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">risks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  risk_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R001"</span>, <span class="st">"R002"</span><span class="op">)</span>,</span>
+<span>  description <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Missing vars"</span>, <span class="st">"Bad derivation"</span><span class="op">)</span>,</span>
+<span>  probability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">3</span><span class="op">)</span>, impact <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span>, detectability <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/apply_risk_model.html">apply_risk_model</a></span><span class="op">(</span><span class="va">risks</span>, <span class="fu"><a href="../reference/risk_models.html">risk_model_probability_impact</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
+<span><span class="co">#&gt;   risk_id raw_score risk_score risk_level model             </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> R001           20         80 critical   probability_impact</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> R002           12         48 high       probability_impact</span></span>
+<span><span class="fu"><a href="../reference/apply_risk_model.html">apply_risk_model</a></span><span class="op">(</span><span class="va">risks</span>, <span class="fu"><a href="../reference/risk_models.html">risk_model_ich_q9</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
+<span><span class="co">#&gt;   risk_id raw_score risk_score risk_level   model </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> R001            9      100   unacceptable ich_q9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> R002            6       66.7 unacceptable ich_q9</span></span></code></pre></div>
+<p>To use your own rule, build a <code><a href="../reference/risk_model.html">risk_model()</a></code> with a
+scoring function, a maximum raw score for normalization, and level
+bands:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">impact_only</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/risk_model.html">risk_model</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"impact_only"</span>,</span>
+<span>  score <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="va">df</span><span class="op">$</span><span class="va">impact</span>,</span>
+<span>  max_raw <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  bands <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>high <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>, medium <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, low <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  required <span class="op">=</span> <span class="st">"impact"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/apply_risk_model.html">apply_risk_model</a></span><span class="op">(</span><span class="va">risks</span>, <span class="va">impact_only</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 5</span></span></span>
+<span><span class="co">#&gt;   risk_id raw_score risk_score risk_level model      </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> R001            5        100 high       impact_only</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> R002            4         80 high       impact_only</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

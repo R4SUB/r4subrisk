@@ -40,7 +40,7 @@ A tibble suitable for
 The mapping from evidence to risk uses:
 
 - `risk_id`: derived from `indicator_id` + `asset_id` via
-  [`r4subcore::hash_id()`](https://rdrr.io/pkg/r4subcore/man/hash_id.html)
+  [`r4subcore::hash_id()`](https://r4sub.github.io/r4subcore/reference/hash_id.html)
 
 - `category`: mapped from `indicator_domain`
 

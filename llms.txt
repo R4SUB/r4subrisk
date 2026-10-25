@@ -24,7 +24,7 @@ pak::pak(c("R4SUB/r4subcore", "R4SUB/r4subrisk"))
 
 ## FMEA Risk Model
 
-Each risk is scored on three dimensions (1–5 scale):
+Each risk is scored on three dimensions (1-5 scale):
 
 - **Probability**: likelihood the issue persists to submission
 - **Impact**: regulatory consequence if unresolved
@@ -32,14 +32,14 @@ Each risk is scored on three dimensions (1–5 scale):
   hard)
 
 **RPN** (Risk Priority Number) = Probability × Impact × Detectability
-(range 1–125)
+(range 1-125)
 
 | RPN    | Level      | Action                         |
 |--------|------------|--------------------------------|
-| 80–125 | `critical` | Immediate action required      |
-| 40–79  | `high`     | Must resolve before submission |
-| 15–39  | `medium`   | Plan mitigation                |
-| 1–14   | `low`      | Monitor                        |
+| 80-125 | `critical` | Immediate action required      |
+| 40-79  | `high`     | Must resolve before submission |
+| 15-39  | `medium`   | Plan mitigation                |
+| 1-14   | `low`      | Monitor                        |
 
 ## Quick Start
 
@@ -91,9 +91,21 @@ ev  <- risk_register_to_evidence(rr, ctx = ctx)
 - **Mitigation-aware:** track and measure risk reduction over time
 - **Transparent:** every RPN is decomposable into P × I × D
 
+## Maintained by
+
+R4SUB is part of the open-source work of
+[TechWorksLab](https://techworkslab.com) - clinical programming and
+regulatory submissions. Maintainer: Pawan Rama Mali.
+
 ## License
 
 MIT
+
+## Further reading
+
+- [FMEA risk scoring for a submission
+  package](https://techworkslab.com/insights-fmea-risk-scoring-submissions),
+  the RPN risk model this package implements, from TECHWORKSLAB.
 
 # Package index
 
@@ -120,6 +132,33 @@ MIT
 - [`risk_indicator_summary()`](https://r4sub.github.io/r4subrisk/reference/risk_indicator_summary.md)
   : Compute Risk Indicator Summary
 
+## Risk Modeling
+
+- [`risk_model()`](https://r4sub.github.io/r4subrisk/reference/risk_model.md)
+  : Define a Risk Scoring Model
+- [`risk_model_fmea()`](https://r4sub.github.io/r4subrisk/reference/risk_models.md)
+  [`risk_model_probability_impact()`](https://r4sub.github.io/r4subrisk/reference/risk_models.md)
+  [`risk_model_ich_q9()`](https://r4sub.github.io/r4subrisk/reference/risk_models.md)
+  : Pre-Built Risk Models
+- [`apply_risk_model()`](https://r4sub.github.io/r4subrisk/reference/apply_risk_model.md)
+  : Score Risks with a Model
+- [`risk_model_overall()`](https://r4sub.github.io/r4subrisk/reference/risk_model_overall.md)
+  : Overall Normalized Risk from a Scored Set
+- [`risk_reduction_summary()`](https://r4sub.github.io/r4subrisk/reference/risk_reduction_summary.md)
+  : Summarize Risk Reduction Between Two Registers
+
+## Monte Carlo Simulation
+
+- [`risk_monte_carlo()`](https://r4sub.github.io/r4subrisk/reference/risk_monte_carlo.md)
+  : Monte Carlo Uncertainty on Risk Priority Numbers
+
+## Visualization
+
+- [`risk_heatmap_data()`](https://r4sub.github.io/r4subrisk/reference/risk_heatmap_data.md)
+  : Build Risk Heatmap Data
+- [`plot_risk_heatmap()`](https://r4sub.github.io/r4subrisk/reference/plot_risk_heatmap.md)
+  : Plot an FMEA Risk Heatmap
+
 ## Evidence Integration
 
 - [`evidence_to_risks()`](https://r4sub.github.io/r4subrisk/reference/evidence_to_risks.md)
@@ -133,10 +172,18 @@ MIT
   : Print Risk Register
 - [`print(`*`<risk_scores>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_scores.md)
   : Print Risk Scores
+- [`print(`*`<risk_model>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_model.md)
+  : Print a Risk Model
+- [`print(`*`<risk_monte_carlo>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_monte_carlo.md)
+  : Print Monte Carlo Risk Result
+- [`print(`*`<risk_reduction>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_reduction.md)
+  : Print a Risk Reduction Summary
 
 # Articles
 
 ### All vignettes
 
+- [Case study: FMEA risk on a pilot
+  submission](https://r4sub.github.io/r4subrisk/articles/case-study-fmea-pilot.md):
 - [Risk Management with
   r4subrisk](https://r4sub.github.io/r4subrisk/articles/risk-management.md):

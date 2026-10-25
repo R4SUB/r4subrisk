@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">r4subrisk</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,8 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/risk-management.html">Risk Management with r4subrisk</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/case-study-fmea-pilot.html">Case study: FMEA risk on a pilot submission</a></li>
+    <li><a class="dropdown-item" href="../articles/risk-management.html">Risk Management with r4subrisk</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -112,6 +113,89 @@
         </dt>
         <dd>Compute Risk Indicator Summary</dd>
       </dl></div><div class="section level2">
+      <h2 id="risk-modeling">Risk Modeling<a class="anchor" aria-label="anchor" href="#risk-modeling"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="risk_model.html">risk_model()</a></code>
+
+        </dt>
+        <dd>Define a Risk Scoring Model</dd>
+
+        <dt>
+
+          <code><a href="risk_models.html">risk_model_fmea()</a></code> <code><a href="risk_models.html">risk_model_probability_impact()</a></code> <code><a href="risk_models.html">risk_model_ich_q9()</a></code>
+
+        </dt>
+        <dd>Pre-Built Risk Models</dd>
+
+        <dt>
+
+          <code><a href="apply_risk_model.html">apply_risk_model()</a></code>
+
+        </dt>
+        <dd>Score Risks with a Model</dd>
+
+        <dt>
+
+          <code><a href="risk_model_overall.html">risk_model_overall()</a></code>
+
+        </dt>
+        <dd>Overall Normalized Risk from a Scored Set</dd>
+
+        <dt>
+
+          <code><a href="risk_reduction_summary.html">risk_reduction_summary()</a></code>
+
+        </dt>
+        <dd>Summarize Risk Reduction Between Two Registers</dd>
+      </dl></div><div class="section level2">
+      <h2 id="monte-carlo-simulation">Monte Carlo Simulation<a class="anchor" aria-label="anchor" href="#monte-carlo-simulation"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="risk_monte_carlo.html">risk_monte_carlo()</a></code>
+
+        </dt>
+        <dd>Monte Carlo Uncertainty on Risk Priority Numbers</dd>
+      </dl></div><div class="section level2">
+      <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="risk_heatmap_data.html">risk_heatmap_data()</a></code>
+
+        </dt>
+        <dd>Build Risk Heatmap Data</dd>
+
+        <dt>
+
+          <code><a href="plot_risk_heatmap.html">plot_risk_heatmap()</a></code>
+
+        </dt>
+        <dd>Plot an FMEA Risk Heatmap</dd>
+      </dl></div><div class="section level2">
       <h2 id="evidence-integration">Evidence Integration<a class="anchor" aria-label="anchor" href="#evidence-integration"></a></h2>
 
 
@@ -157,6 +241,27 @@
 
         </dt>
         <dd>Print Risk Scores</dd>
+
+        <dt>
+
+          <code><a href="print.risk_model.html">print(<i>&lt;risk_model&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Print a Risk Model</dd>
+
+        <dt>
+
+          <code><a href="print.risk_monte_carlo.html">print(<i>&lt;risk_monte_carlo&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Print Monte Carlo Risk Result</dd>
+
+        <dt>
+
+          <code><a href="print.risk_reduction.html">print(<i>&lt;risk_reduction&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Print a Risk Reduction Summary</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

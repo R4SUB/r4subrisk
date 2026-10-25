@@ -38,8 +38,8 @@ cfg$required_origins
 ## Creating a risk register
 
 A risk register is built from a data frame with at minimum `risk_id`,
-`description`, `probability`, `impact`, and `detectability` — each
-scored 1–5. The RPN is computed as
+`description`, `probability`, `impact`, and `detectability` - each
+scored 1-5. The RPN is computed as
 `probability * impact * detectability`.
 
 ``` r
@@ -195,4 +195,92 @@ ev <- r4subcore::as_evidence(
 )
 risk_df <- evidence_to_risks(ev)
 rr_from_evidence <- create_risk_register(risk_df)
+```
+
+## Reduction summary
+
+[`compare_risk_registers()`](https://r4sub.github.io/r4subrisk/reference/compare_risk_registers.md)
+lists what changed.
+[`risk_reduction_summary()`](https://r4sub.github.io/r4subrisk/reference/risk_reduction_summary.md)
+rolls that up into the headline a reviewer wants: how much risk was
+actually removed.
+
+``` r
+
+risk_reduction_summary(rr, rr_mitigated)
+#> ℹ Risk Reduction Summary
+#> ℹ Total RPN: 141 -> 141 (0 down, 0%)
+#> ℹ   Mean RPN: 28.2 -> 28.2
+#> ℹ   Risks reduced: 0, downgraded a level: 0
+```
+
+## Risk heatmap
+
+The FMEA probability by impact heatmap is the standard way quality and
+regulatory teams read a risk picture.
+[`risk_heatmap_data()`](https://r4sub.github.io/r4subrisk/reference/risk_heatmap_data.md)
+gives the grid as a table, and
+[`plot_risk_heatmap()`](https://r4sub.github.io/r4subrisk/reference/plot_risk_heatmap.md)
+draws it.
+
+``` r
+
+plot_risk_heatmap(rr)
+```
+
+![](risk-management_files/figure-html/heatmap-1.png)
+
+## Alternative risk models
+
+FMEA (probability times impact times detectability) is the default, but
+the scoring rule is pluggable.
+[`risk_model_probability_impact()`](https://r4sub.github.io/r4subrisk/reference/risk_models.md)
+drops detectability for a two-factor matrix, and
+[`risk_model_ich_q9()`](https://r4sub.github.io/r4subrisk/reference/risk_models.md)
+gives a qualitative acceptable, tolerable, unacceptable ranking. Any
+model normalizes to a 0-100 score, so the Risk pillar consumes them the
+same way.
+
+``` r
+
+risks <- data.frame(
+  risk_id = c("R001", "R002"),
+  description = c("Missing vars", "Bad derivation"),
+  probability = c(4, 3), impact = c(5, 4), detectability = c(2, 3)
+)
+
+apply_risk_model(risks, risk_model_probability_impact())
+#> # A tibble: 2 × 5
+#>   risk_id raw_score risk_score risk_level model             
+#>   <chr>       <dbl>      <dbl> <chr>      <chr>             
+#> 1 R001           20         80 critical   probability_impact
+#> 2 R002           12         48 high       probability_impact
+apply_risk_model(risks, risk_model_ich_q9())
+#> # A tibble: 2 × 5
+#>   risk_id raw_score risk_score risk_level   model 
+#>   <chr>       <dbl>      <dbl> <chr>        <chr> 
+#> 1 R001            9      100   unacceptable ich_q9
+#> 2 R002            6       66.7 unacceptable ich_q9
+```
+
+To use your own rule, build a
+[`risk_model()`](https://r4sub.github.io/r4subrisk/reference/risk_model.md)
+with a scoring function, a maximum raw score for normalization, and
+level bands:
+
+``` r
+
+impact_only <- risk_model(
+  name = "impact_only",
+  score = function(df) df$impact,
+  max_raw = 5,
+  bands = list(high = c(4, 5), medium = c(3, 3), low = c(1, 2)),
+  required = "impact"
+)
+apply_risk_model(risks, impact_only)
+#> # A tibble: 2 × 5
+#>   risk_id raw_score risk_score risk_level model      
+#>   <chr>       <dbl>      <dbl> <chr>      <chr>      
+#> 1 R001            5        100 high       impact_only
+#> 2 R002            4         80 high       impact_only
 ```

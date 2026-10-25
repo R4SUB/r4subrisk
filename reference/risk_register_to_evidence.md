@@ -1,7 +1,7 @@
 # Convert Risk Register to R4SUB Evidence
 
 Emits evidence rows compatible with
-[`r4subcore::validate_evidence()`](https://rdrr.io/pkg/r4subcore/man/validate_evidence.html)
+[`r4subcore::validate_evidence()`](https://r4sub.github.io/r4subcore/reference/validate_evidence.html)
 for each risk item in the register, plus aggregate risk metric rows.
 
 ## Usage
@@ -25,7 +25,7 @@ risk_register_to_evidence(
 - ctx:
 
   An `r4sub_run_context` from
-  [`r4subcore::r4sub_run_context()`](https://rdrr.io/pkg/r4subcore/man/r4sub_run_context.html).
+  [`r4subcore::r4sub_run_context()`](https://r4sub.github.io/r4subcore/reference/r4sub_run_context.html).
 
 - source_name:
 
@@ -38,7 +38,7 @@ risk_register_to_evidence(
 ## Value
 
 A data.frame of evidence rows passing
-[`r4subcore::validate_evidence()`](https://rdrr.io/pkg/r4subcore/man/validate_evidence.html).
+[`r4subcore::validate_evidence()`](https://r4sub.github.io/r4subcore/reference/validate_evidence.html).
 
 ## Examples
 
