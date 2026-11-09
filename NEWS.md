@@ -1,5 +1,10 @@
 # r4subrisk (development version)
 
+- Add `risk_trend()`, which turns a named, ordered list of risk registers (one
+  per submission milestone) into a tidy burndown tibble: per milestone the total
+  RPN, mean RPN, number of risks, and open-critical count. The stored RPN and
+  risk levels are reused as-is, so no scoring is recomputed. `plot_risk_trend()`
+  draws the burndown as a ggplot line chart when `ggplot2` is available.
 - Import `%||%` from rlang so the package works on its declared minimum R
   version (R >= 4.2); the operator only became part of base R in 4.4.0.
 - Fix the "Risk Management" vignette: the mitigation example now uses the
