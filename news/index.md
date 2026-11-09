@@ -1,5 +1,18 @@
 # Changelog
 
+## r4subrisk (development version)
+
+- Import `%||%` from rlang so the package works on its declared minimum
+  R version (R \>= 4.2); the operator only became part of base R in
+  4.4.0.
+- Fix the “Risk Management” vignette: the mitigation example now uses
+  the `probability`, `impact`, and `detectability` columns that
+  [`apply_mitigations()`](https://r4sub.github.io/r4subrisk/reference/apply_mitigations.md)
+  actually reads (previously `*_residual` columns were silently ignored,
+  so the before/after comparison showed no change), and the
+  configuration example no longer references the non-existent
+  `required_origins` field.
+
 ## r4subrisk 0.3.1
 
 - Metadata and documentation polish for CRAN submission; no user-facing

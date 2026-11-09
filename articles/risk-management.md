@@ -31,8 +31,8 @@ cfg$rpn_bands
 #> 
 #> $low
 #> [1]  1 14
-cfg$required_origins
-#> NULL
+cfg$default_detectability
+#> [1] 3
 ```
 
 ## Creating a risk register
@@ -117,15 +117,16 @@ after mitigations are applied:
 ``` r
 
 controls <- data.frame(
-  risk_id               = c("RISK-001", "RISK-002", "RISK-003"),
-  mitigation            = c(
+  risk_id       = c("RISK-001", "RISK-002", "RISK-003"),
+  mitigation    = c(
     "Automated variable check implemented in CI pipeline",
     "Derivation review added to QC checklist",
     "QC sign-off required before dataset lock"
   ),
-  probability_residual  = c(1L, 2L, 1L),
-  impact_residual       = c(4L, 5L, 5L),
-  detectability_residual = c(1L, 1L, 1L),
+  probability   = c(1L, 2L, 1L),
+  impact        = c(4L, 5L, 5L),
+  detectability = c(1L, 1L, 1L),
+  status        = "mitigated",
   stringsAsFactors = FALSE
 )
 
@@ -145,9 +146,9 @@ comparison
 #> # A tibble: 5 × 4
 #>   risk_id  rpn_before rpn_after rpn_delta
 #>   <chr>         <dbl>     <dbl>     <dbl>
-#> 1 RISK-001         24        24         0
-#> 2 RISK-002         60        60         0
-#> 3 RISK-003         40        40         0
+#> 1 RISK-001         24         4       -20
+#> 2 RISK-002         60        10       -50
+#> 3 RISK-003         40         5       -35
 #> 4 RISK-004         12        12         0
 #> 5 RISK-005          5         5         0
 #> 
@@ -161,14 +162,14 @@ comparison
 #> # A tibble: 5 × 4
 #>   risk_id  level_before level_after changed
 #>   <chr>    <chr>        <chr>       <lgl>  
-#> 1 RISK-001 medium       medium      FALSE  
-#> 2 RISK-002 high         high        FALSE  
-#> 3 RISK-003 high         high        FALSE  
+#> 1 RISK-001 medium       low         TRUE   
+#> 2 RISK-002 high         low         TRUE   
+#> 3 RISK-003 high         low         TRUE   
 #> 4 RISK-004 low          low         FALSE  
 #> 5 RISK-005 low          low         FALSE  
 #> 
 #> $delta_mean_rpn
-#> [1] 0
+#> [1] -21
 ```
 
 ## Integration with r4subcore evidence
@@ -209,9 +210,9 @@ actually removed.
 
 risk_reduction_summary(rr, rr_mitigated)
 #> ℹ Risk Reduction Summary
-#> ℹ Total RPN: 141 -> 141 (0 down, 0%)
-#> ℹ   Mean RPN: 28.2 -> 28.2
-#> ℹ   Risks reduced: 0, downgraded a level: 0
+#> ℹ Total RPN: 141 -> 36 (105 down, 74.5%)
+#> ℹ   Mean RPN: 28.2 -> 7.2
+#> ℹ   Risks reduced: 3, downgraded a level: 3
 ```
 
 ## Risk heatmap
