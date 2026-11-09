@@ -28,7 +28,7 @@ thresholds and scoring scales:
 ```{r config}
 cfg <- risk_config_default()
 cfg$rpn_bands
-cfg$required_origins
+cfg$default_detectability
 ```
 
 ## Creating a risk register
@@ -80,15 +80,16 @@ residual risk after mitigations are applied:
 
 ```{r mitigations}
 controls <- data.frame(
-  risk_id               = c("RISK-001", "RISK-002", "RISK-003"),
-  mitigation            = c(
+  risk_id       = c("RISK-001", "RISK-002", "RISK-003"),
+  mitigation    = c(
     "Automated variable check implemented in CI pipeline",
     "Derivation review added to QC checklist",
     "QC sign-off required before dataset lock"
   ),
-  probability_residual  = c(1L, 2L, 1L),
-  impact_residual       = c(4L, 5L, 5L),
-  detectability_residual = c(1L, 1L, 1L),
+  probability   = c(1L, 2L, 1L),
+  impact        = c(4L, 5L, 5L),
+  detectability = c(1L, 1L, 1L),
+  status        = "mitigated",
   stringsAsFactors = FALSE
 )
 
