@@ -7,5 +7,6 @@
 #'   bind_rows desc
 #' @importFrom rlang .data abort inform %||%
 #' @importFrom tibble tibble as_tibble
+#' @importFrom utils read.csv write.csv
 ## usethis namespace: end
 NULL
