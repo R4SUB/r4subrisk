@@ -1,5 +1,12 @@
 # r4subrisk (development version)
 
+- Add `write_risk_register()` and `read_risk_register()` for a risk register
+  import/export round-trip. Registers export to CSV (or xlsx when `writexl` /
+  `readxl` are installed) as a faithful, human-readable snapshot. On import the
+  file is rebuilt through `create_risk_register()`, so the canonical schema,
+  RPN, and risk-level classification are recomputed from the assessed scores
+  rather than trusted from the file; a write -> read cycle reproduces an
+  equivalent register.
 - Add `risk_trend()`, which turns a named, ordered list of risk registers (one
   per submission milestone) into a tidy burndown tibble: per milestone the total
   RPN, mean RPN, number of risks, and open-critical count. The stored RPN and
