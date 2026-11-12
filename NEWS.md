@@ -1,5 +1,13 @@
 # r4subrisk (development version)
 
+- Add `risk_pareto()`, a Pareto ("vital few") prioritization of a register. It
+  ranks risks by their stored RPN (recomputing nothing), reports each risk's
+  share and the running cumulative share of total RPN, and flags the smallest
+  top run of risks that together carry a caller-supplied cumulative share
+  (`cum_cutoff`, default 0.8, the usual Pareto 80 percent). The cutoff is a
+  reporting convention over cumulative RPN share, not a risk, severity, or RPN
+  threshold. `plot_risk_pareto()` draws the classic bar-plus-cumulative-line
+  Pareto chart when `ggplot2` is available.
 - Add `write_risk_register()` and `read_risk_register()` for a risk register
   import/export round-trip. Registers export to CSV (or xlsx when `writexl` /
   `readxl` are installed) as a faithful, human-readable snapshot. On import the
