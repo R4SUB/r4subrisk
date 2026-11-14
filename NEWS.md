@@ -1,5 +1,18 @@
 # r4subrisk (development version)
 
+- Add `reconcile_risk_registers()`, an item-level audit of what changed between
+  two versions of a risk register (a prior vs current draft, or two assessors'
+  registers). It aligns rows by `risk_id` and labels each risk `added`,
+  `removed`, `changed`, or `unchanged`; for changed risks it reports which
+  fields differ (description, category, probability, impact, detectability,
+  owner, mitigation, status) as a tidy `field_changes` audit, with prior and
+  current values side by side. RPN movement is read from each register's own
+  stored `rpn` (nothing is recomputed or invented); it is a purely structural
+  diff. This complements `risk_trend()` (trajectory over many milestones) with a
+  line-by-line view of a single pair.
+- Fix the documented return value of `compare_risk_registers()`: `rpn_changes`
+  is the tibble of all risks common to both registers (unchanged ones included,
+  with a zero delta), not only those whose RPN changed.
 - Add `risk_pareto()`, a Pareto ("vital few") prioritization of a register. It
   ranks risks by their stored RPN (recomputing nothing), reports each risk's
   share and the running cumulative share of total RPN, and flags the smallest

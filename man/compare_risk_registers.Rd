@@ -14,7 +14,9 @@ compare_risk_registers(before, after)
 \value{
 A list with:
 \itemize{
-\item \code{rpn_changes}: tibble of risks with changed RPN
+\item \code{rpn_changes}: tibble of the risks common to both registers with their
+\code{rpn_before}, \code{rpn_after}, and \code{rpn_delta} (unchanged common risks are
+included, with a delta of 0)
 \item \code{new_risks}: risk_ids present in \code{after} but not \code{before}
 \item \code{resolved_risks}: risk_ids present in \code{before} but not \code{after}
 \item \code{level_transitions}: tibble of risk level changes
