@@ -92,6 +92,28 @@ test_that("compare_risk_registers computes RPN delta", {
   expect_true(comp$delta_mean_rpn < 0)
 })
 
+test_that("compare_risk_registers rpn_changes includes unchanged common risks", {
+  r1 <- data.frame(
+    risk_id = c("R001", "R002"),
+    description = c("A", "B"),
+    probability = c(4, 3), impact = c(5, 4), detectability = c(2, 3)
+  )
+  # R001 unchanged, R002 reduced.
+  r2 <- data.frame(
+    risk_id = c("R001", "R002"),
+    description = c("A", "B"),
+    probability = c(4, 1), impact = c(5, 4), detectability = c(2, 3)
+  )
+  rr1 <- create_risk_register(r1)
+  rr2 <- create_risk_register(r2)
+
+  comp <- compare_risk_registers(rr1, rr2)
+
+  # Both common risks are reported, the unchanged one with a zero delta.
+  expect_setequal(comp$rpn_changes$risk_id, c("R001", "R002"))
+  expect_equal(comp$rpn_changes$rpn_delta[comp$rpn_changes$risk_id == "R001"], 0)
+})
+
 test_that("compare_risk_registers detects level transitions", {
   r1 <- data.frame(
     risk_id = "R001", description = "A",

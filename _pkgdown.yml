@@ -29,6 +29,7 @@ reference:
       - create_risk_register
       - apply_mitigations
       - compare_risk_registers
+      - reconcile_risk_registers
   - title: "Scoring"
     contents:
       - compute_risk_scores
@@ -48,6 +49,8 @@ reference:
     contents:
       - risk_heatmap_data
       - plot_risk_heatmap
+      - plot_risk_pareto
+      - plot_risk_trend
   - title: "Evidence Integration"
     contents:
       - evidence_to_risks
@@ -59,6 +62,14 @@ reference:
       - print.risk_model
       - print.risk_monte_carlo
       - print.risk_reduction
+      - print.risk_pareto
+      - print.risk_reconciliation
+  - title: "Trend, Pareto & I/O"
+    contents:
+      - risk_trend
+      - risk_pareto
+      - read_risk_register
+      - write_risk_register
 
 footer:
   structure:
