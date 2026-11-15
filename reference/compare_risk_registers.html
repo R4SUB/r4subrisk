@@ -64,7 +64,9 @@ new risks, resolved risks, and risk level transitions.</p>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with:</p><ul><li><p><code>rpn_changes</code>: tibble of risks with changed RPN</p></li>
+    <p>A list with:</p><ul><li><p><code>rpn_changes</code>: tibble of the risks common to both registers with their
+<code>rpn_before</code>, <code>rpn_after</code>, and <code>rpn_delta</code> (unchanged common risks are
+included, with a delta of 0)</p></li>
 <li><p><code>new_risks</code>: risk_ids present in <code>after</code> but not <code>before</code></p></li>
 <li><p><code>resolved_risks</code>: risk_ids present in <code>before</code> but not <code>after</code></p></li>
 <li><p><code>level_transitions</code>: tibble of risk level changes</p></li>

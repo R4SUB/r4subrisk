@@ -68,6 +68,15 @@ rr <- create_risk_register(risk_items)
 # Emit r4subcore-compatible evidence rows
 ctx <- r4sub_run_context(study_id = "ABC123", environment = "DEV")
 ev  <- risk_register_to_evidence(rr, ctx = ctx)
+
+# Share or re-import a register (CSV, or xlsx with writexl/readxl installed).
+# On import the RPN and risk levels are recomputed from the assessed scores.
+write_risk_register(rr, "risk_register.csv")
+rr <- read_risk_register("risk_register.csv")
+
+# Track risk falling across submission milestones
+trend <- risk_trend(list(baseline = rr_m1, interim = rr_m2, final = rr_m3))
+plot_risk_trend(trend)  # ggplot burndown when ggplot2 is available
 ```
 
 ## Key Functions
@@ -83,6 +92,10 @@ ev  <- risk_register_to_evidence(rr, ctx = ctx)
 | [`risk_register_to_evidence()`](https://r4sub.github.io/r4subrisk/reference/risk_register_to_evidence.md) | Emit r4subcore-compatible evidence rows |
 | [`apply_mitigations()`](https://r4sub.github.io/r4subrisk/reference/apply_mitigations.md) | Update risks with mitigations, recompute RPN |
 | [`compare_risk_registers()`](https://r4sub.github.io/r4subrisk/reference/compare_risk_registers.md) | Trend analysis between snapshots |
+| [`risk_trend()`](https://r4sub.github.io/r4subrisk/reference/risk_trend.md) | Milestone-over-milestone RPN burndown across a sequence of registers |
+| [`plot_risk_trend()`](https://r4sub.github.io/r4subrisk/reference/plot_risk_trend.md) | Plot the milestone burndown as a ggplot line chart |
+| [`write_risk_register()`](https://r4sub.github.io/r4subrisk/reference/write_risk_register.md) | Export a risk register to CSV (or xlsx) |
+| [`read_risk_register()`](https://r4sub.github.io/r4subrisk/reference/read_risk_register.md) | Import a risk register from CSV (or xlsx), recomputing RPN + levels |
 
 ## Design Principles
 

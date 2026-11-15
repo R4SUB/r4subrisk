@@ -23,7 +23,9 @@ compare_risk_registers(before, after)
 
 A list with:
 
-- `rpn_changes`: tibble of risks with changed RPN
+- `rpn_changes`: tibble of the risks common to both registers with their
+  `rpn_before`, `rpn_after`, and `rpn_delta` (unchanged common risks are
+  included, with a delta of 0)
 
 - `new_risks`: risk_ids present in `after` but not `before`
 

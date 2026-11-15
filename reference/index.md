@@ -13,6 +13,8 @@
   : Update Risk Mitigation Status
 - [`compare_risk_registers()`](https://r4sub.github.io/r4subrisk/reference/compare_risk_registers.md)
   : Compare Risk Registers (Trend Analysis)
+- [`reconcile_risk_registers()`](https://r4sub.github.io/r4subrisk/reference/reconcile_risk_registers.md)
+  : Reconcile Two Risk Registers
 
 ## Scoring
 
@@ -49,6 +51,10 @@
   : Build Risk Heatmap Data
 - [`plot_risk_heatmap()`](https://r4sub.github.io/r4subrisk/reference/plot_risk_heatmap.md)
   : Plot an FMEA Risk Heatmap
+- [`plot_risk_pareto()`](https://r4sub.github.io/r4subrisk/reference/plot_risk_pareto.md)
+  : Plot a Risk Pareto Chart
+- [`plot_risk_trend()`](https://r4sub.github.io/r4subrisk/reference/plot_risk_trend.md)
+  : Plot a Risk Burndown
 
 ## Evidence Integration
 
@@ -69,3 +75,18 @@
   : Print Monte Carlo Risk Result
 - [`print(`*`<risk_reduction>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_reduction.md)
   : Print a Risk Reduction Summary
+- [`print(`*`<risk_pareto>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_pareto.md)
+  : Print a Risk Pareto Table
+- [`print(`*`<risk_reconciliation>`*`)`](https://r4sub.github.io/r4subrisk/reference/print.risk_reconciliation.md)
+  : Print a Risk Reconciliation
+
+## Trend, Pareto & I/O
+
+- [`risk_trend()`](https://r4sub.github.io/r4subrisk/reference/risk_trend.md)
+  : Risk Burndown Across Submission Milestones
+- [`risk_pareto()`](https://r4sub.github.io/r4subrisk/reference/risk_pareto.md)
+  : Pareto Prioritization of a Risk Register
+- [`read_risk_register()`](https://r4sub.github.io/r4subrisk/reference/read_risk_register.md)
+  : Read a Risk Register from Disk
+- [`write_risk_register()`](https://r4sub.github.io/r4subrisk/reference/write_risk_register.md)
+  : Write a Risk Register to Disk

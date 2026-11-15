@@ -139,7 +139,16 @@
 <span></span>
 <span><span class="co"># Emit r4subcore-compatible evidence rows</span></span>
 <span><span class="va">ctx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r4sub.github.io/r4subcore/reference/r4sub_run_context.html" class="external-link">r4sub_run_context</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="st">"ABC123"</span>, environment <span class="op">=</span> <span class="st">"DEV"</span><span class="op">)</span></span>
-<span><span class="va">ev</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/risk_register_to_evidence.html">risk_register_to_evidence</a></span><span class="op">(</span><span class="va">rr</span>, ctx <span class="op">=</span> <span class="va">ctx</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">ev</span>  <span class="op">&lt;-</span> <span class="fu"><a href="reference/risk_register_to_evidence.html">risk_register_to_evidence</a></span><span class="op">(</span><span class="va">rr</span>, ctx <span class="op">=</span> <span class="va">ctx</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Share or re-import a register (CSV, or xlsx with writexl/readxl installed).</span></span>
+<span><span class="co"># On import the RPN and risk levels are recomputed from the assessed scores.</span></span>
+<span><span class="fu"><a href="reference/write_risk_register.html">write_risk_register</a></span><span class="op">(</span><span class="va">rr</span>, <span class="st">"risk_register.csv"</span><span class="op">)</span></span>
+<span><span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_risk_register.html">read_risk_register</a></span><span class="op">(</span><span class="st">"risk_register.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Track risk falling across submission milestones</span></span>
+<span><span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/risk_trend.html">risk_trend</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>baseline <span class="op">=</span> <span class="va">rr_m1</span>, interim <span class="op">=</span> <span class="va">rr_m2</span>, final <span class="op">=</span> <span class="va">rr_m3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/plot_risk_trend.html">plot_risk_trend</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span>  <span class="co"># ggplot burndown when ggplot2 is available</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="key-functions">Key Functions<a class="anchor" aria-label="anchor" href="#key-functions"></a>
@@ -189,6 +198,22 @@
 <tr>
 <td><code><a href="reference/compare_risk_registers.html">compare_risk_registers()</a></code></td>
 <td>Trend analysis between snapshots</td>
+</tr>
+<tr>
+<td><code><a href="reference/risk_trend.html">risk_trend()</a></code></td>
+<td>Milestone-over-milestone RPN burndown across a sequence of registers</td>
+</tr>
+<tr>
+<td><code><a href="reference/plot_risk_trend.html">plot_risk_trend()</a></code></td>
+<td>Plot the milestone burndown as a ggplot line chart</td>
+</tr>
+<tr>
+<td><code><a href="reference/write_risk_register.html">write_risk_register()</a></code></td>
+<td>Export a risk register to CSV (or xlsx)</td>
+</tr>
+<tr>
+<td><code><a href="reference/read_risk_register.html">read_risk_register()</a></code></td>
+<td>Import a risk register from CSV (or xlsx), recomputing RPN + levels</td>
 </tr>
 </tbody>
 </table>
